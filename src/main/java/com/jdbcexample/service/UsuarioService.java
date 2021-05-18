@@ -46,6 +46,12 @@ public class UsuarioService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","Cc1030671497");
 			Statement st = con.createStatement();
+			try {
+				id = String.valueOf(Integer.parseInt(id));
+			}
+			catch(Exception ex) {
+				id = "0";
+			}
 			ResultSet rs = st.executeQuery("SELECT * FROM USUARIOS WHERE ID = "+id.trim());
 			if(rs.next()) {				
 				return new Usuario(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3));
